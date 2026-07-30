@@ -1,51 +1,27 @@
-const services = [
+const recentSites = [
   {
-    index: "01",
-    title: "Sites que vendem",
-    description:
-      "Landing pages, sites institucionais e lojas virtuais rápidas, responsivas e pensadas para transformar visitas em oportunidades.",
-    tags: ["UI/UX", "SEO", "Conversão"],
-  },
-  {
-    index: "02",
-    title: "Social Media",
-    description:
-      "Conteúdo estratégico, design consistente e uma presença digital que aproxima sua marca das pessoas certas.",
-    tags: ["Estratégia", "Conteúdo", "Design"],
-  },
-  {
-    index: "03",
-    title: "Tráfego pago",
-    description:
-      "Campanhas em Google e Meta Ads com otimização contínua para ampliar alcance, gerar leads e acelerar resultados.",
-    tags: ["Google Ads", "Meta Ads", "Dados"],
-  },
-];
-
-const projects = [
-  {
-    title: "Experiências digitais",
-    category: "Sites & landing pages",
+    title: "Insta Domination",
+    description: "Landing page para lançamento de curso online.",
     image: "/projects/site-01.jpg",
-    className: "project-wide",
+    href: "#contato",
   },
   {
-    title: "Marcas com presença",
-    category: "Social media",
-    image: "/projects/social-01.jpg",
-    className: "project-standard",
+    title: "ISK Contabilidade",
+    description: "Site institucional claro, sólido e profissional.",
+    image: "/projects/site-02.jpg",
+    href: "https://iskcontabilidade.com/",
   },
   {
-    title: "Design que posiciona",
-    category: "Conteúdo estratégico",
-    image: "/projects/social-04.jpg",
-    className: "project-standard",
-  },
-  {
-    title: "Conversão em cada tela",
-    category: "Web design",
+    title: "Marketeezo",
+    description: "Experiência digital leve para uma agência criativa.",
     image: "/projects/site-03.jpg",
-    className: "project-wide",
+    href: "#contato",
+  },
+  {
+    title: "Digital Marketing",
+    description: "Site moderno para apresentar serviços e resultados.",
+    image: "/projects/site-04.jpg",
+    href: "#contato",
   },
 ];
 
@@ -56,6 +32,9 @@ const extras = [
   "Copywriting e redação",
 ];
 
+const whatsappUrl =
+  "https://wa.me/5534999005219?text=Olá%2C%20Patrick!%20Vi%20seu%20site%20e%20quero%20conversar%20sobre%20a%20criação%20do%20meu%20site.";
+
 export default function Home() {
   return (
     <main>
@@ -65,26 +44,21 @@ export default function Home() {
         </a>
 
         <nav className="desktop-nav" aria-label="Navegação principal">
-          <a href="#servicos">Serviços</a>
-          <a href="#projetos">Projetos</a>
+          <a href="#sites">Sites recentes</a>
+          <a href="#processo">Processo</a>
           <a href="#sobre">Sobre</a>
           <a href="#contato">Contato</a>
         </nav>
 
-        <a
-          className="header-cta"
-          href="https://wa.me/5534999005219?text=Olá%2C%20Patrick!%20Vi%20seu%20site%20e%20gostaria%20de%20conversar%20sobre%20um%20projeto."
-          target="_blank"
-          rel="noreferrer"
-        >
-          Falar sobre meu projeto <span aria-hidden="true">↗</span>
+        <a className="header-cta" href={whatsappUrl} target="_blank" rel="noreferrer">
+          Pedir orçamento <span aria-hidden="true">↗</span>
         </a>
 
         <details className="mobile-menu">
           <summary aria-label="Abrir menu"><span></span><span></span></summary>
           <nav aria-label="Navegação móvel">
-            <a href="#servicos">Serviços</a>
-            <a href="#projetos">Projetos</a>
+            <a href="#sites">Sites recentes</a>
+            <a href="#processo">Processo</a>
             <a href="#sobre">Sobre</a>
             <a href="#contato">Contato</a>
           </nav>
@@ -93,159 +67,101 @@ export default function Home() {
 
       <section className="hero" id="inicio">
         <div className="hero-grid" aria-hidden="true"></div>
-        <div className="hero-beam hero-beam-one" aria-hidden="true"></div>
-        <div className="hero-beam hero-beam-two" aria-hidden="true"></div>
+        <div className="hero-orbit hero-orbit-one" aria-hidden="true"></div>
+        <div className="hero-orbit hero-orbit-two" aria-hidden="true"></div>
 
         <div className="hero-copy">
-          <div className="eyebrow"><span>⚡</span> Estratégia, design e tecnologia</div>
-          <h1>
-            Seu negócio merece mais do que <strong>presença.</strong>
-            <span>Merece <em>resultado.</em></span>
-          </h1>
+          <div className="eyebrow"><span></span> Criação de sites sob medida</div>
+          <h1>Sites que explicam, convencem <em>e vendem.</em></h1>
           <p>
-            Sites, conteúdo e tráfego para transformar atenção em clientes e
-            posicionar sua marca no digital.
+            Crio sites rápidos, responsivos e com uma mensagem clara — para sua
+            empresa parecer tão profissional quanto ela realmente é.
           </p>
           <div className="hero-actions">
-            <a
-              className="button button-primary"
-              href="https://wa.me/5534999005219?text=Olá%2C%20Patrick!%20Quero%20crescer%20no%20digital."
-              target="_blank"
-              rel="noreferrer"
-            >
-              Quero crescer no digital <span aria-hidden="true">→</span>
+            <a className="button button-primary" href={whatsappUrl} target="_blank" rel="noreferrer">
+              Quero criar meu site <span aria-hidden="true">↗</span>
             </a>
-            <a className="button button-secondary" href="#projetos">
-              Ver projetos <span aria-hidden="true">↘</span>
+            <a className="button button-secondary" href="#sites">
+              Ver sites recentes <span aria-hidden="true">↓</span>
             </a>
           </div>
-          <div className="hero-proof" aria-label="Principais especialidades">
-            <span>Sites & landing pages</span>
-            <span>Social media</span>
-            <span>Tráfego pago</span>
-          </div>
         </div>
 
-        <div className="hero-visual">
-          <div className="portrait-panel">
-            <div className="portrait-glow" aria-hidden="true"></div>
-            <img
-              src="/assets/patrick-hero.png"
-              alt="Patrick Mendes, especialista em marketing digital"
-              width="900"
-              height="1000"
-              fetchPriority="high"
-            />
-          </div>
-          <div className="metric-card metric-card-one">
-            <span>Presença digital</span>
-            <strong>que converte</strong>
-          </div>
-          <div className="metric-card metric-card-two">
-            <span>Estratégia</span>
-            <strong>ponta a ponta</strong>
-          </div>
-        </div>
-
-        <div className="scroll-cue" aria-hidden="true"><span></span> EXPLORE</div>
-      </section>
-
-      <section className="services section" id="servicos">
-        <div className="section-heading">
-          <div>
-            <span className="kicker">/ O que eu faço</span>
-            <h2>Estratégia que sai do papel e vira <em>crescimento.</em></h2>
-          </div>
-          <p>
-            Uma presença digital completa para conectar sua marca, sua oferta e
-            o público que está pronto para comprar.
-          </p>
-        </div>
-
-        <div className="service-grid">
-          {services.map((service) => (
-            <article className="service-card" key={service.index}>
-              <div className="service-topline">
-                <span>{service.index}</span>
-                <span aria-hidden="true">↗</span>
-              </div>
-              <h3>{service.title}</h3>
-              <p>{service.description}</p>
-              <div className="tag-list">
-                {service.tags.map((tag) => <span key={tag}>{tag}</span>)}
-              </div>
-            </article>
-          ))}
+        <div className="hero-proof" aria-label="Diferenciais do serviço">
+          <span><b>01</b> Design sob medida</span>
+          <span><b>02</b> Perfeito no celular</span>
+          <span><b>03</b> Pronto para vender</span>
         </div>
       </section>
 
-      <div className="ticker" aria-label="Especialidades da RHE Marketing">
-        <div>
-          <span>SITES</span><b>✦</b><span>CONTEÚDO</span><b>✦</b>
-          <span>TRÁFEGO</span><b>✦</b><span>AUTOMAÇÃO</span><b>✦</b>
-          <span>SITES</span><b>✦</b><span>CONTEÚDO</span><b>✦</b>
-        </div>
-      </div>
-
-      <section className="projects section" id="projetos">
-        <div className="section-heading projects-heading">
+      <section className="recent-sites section" id="sites" aria-labelledby="sites-title">
+        <div className="section-heading sites-heading">
           <div>
-            <span className="kicker">/ Projetos selecionados</span>
-            <h2>Ideias fortes merecem uma execução <em>à altura.</em></h2>
+            <span className="kicker">/ Sites recentes</span>
+            <h2 id="sites-title">Trabalhos que já estão <em>no mundo.</em></h2>
           </div>
           <p>
-            Uma seleção de trabalhos desenvolvidos para negócios que queriam
-            comunicar melhor, crescer e ser lembrados.
+            Uma seleção dos projetos mais recentes. Arraste para explorar e
+            clique em um card para conhecer o site.
           </p>
         </div>
 
-        <div className="project-grid">
-          {projects.map((project, index) => (
-            <article className={`project-card ${project.className}`} key={project.title}>
-              <div className="project-image">
-                <img src={project.image} alt={`Projeto de ${project.category}: ${project.title}`} loading="lazy" />
-              </div>
-              <div className="project-caption">
-                <div>
-                  <span>{project.category}</span>
-                  <h3>{project.title}</h3>
+        <div className="carousel-shell">
+          <div className="site-carousel" aria-label="Carrossel de sites recentes">
+            {recentSites.map((site, index) => (
+              <a
+                className="site-card"
+                href={site.href}
+                id={`site-${index + 1}`}
+                key={site.title}
+                aria-label={`Conhecer o projeto ${site.title}`}
+                target={site.href.startsWith("http") ? "_blank" : undefined}
+                rel={site.href.startsWith("http") ? "noreferrer" : undefined}
+              >
+                <div className="site-card-image">
+                  <img src={site.image} alt={`Página do projeto ${site.title}`} loading="lazy" />
+                  <span aria-hidden="true">↗</span>
                 </div>
-                <strong>0{index + 1}</strong>
-              </div>
-            </article>
-          ))}
-        </div>
+                <div className="site-card-copy">
+                  <h3>{site.title}</h3>
+                  <p>{site.description}</p>
+                </div>
+              </a>
+            ))}
+          </div>
 
-        <div className="project-cta-row">
-          <p>Tem uma ideia em mente?</p>
-          <a
-            href="https://wa.me/5534999005219?text=Olá%2C%20Patrick!%20Tenho%20uma%20ideia%20de%20projeto%20e%20quero%20conversar."
-            target="_blank"
-            rel="noreferrer"
-          >
-            Vamos tirar do papel <span aria-hidden="true">↗</span>
-          </a>
+          <div className="carousel-controls" aria-label="Controles do carrossel">
+            <a href="#site-1" aria-label="Ir para o primeiro site">←</a>
+            <div aria-hidden="true"><span></span></div>
+            <a href="#site-4" aria-label="Ir para o último site">→</a>
+          </div>
         </div>
       </section>
 
-      <section className="process section" aria-labelledby="process-title">
-        <div className="process-intro">
+      <section className="video-section section" id="processo" aria-labelledby="process-title">
+        <div className="video-copy">
           <span className="kicker">/ Como funciona</span>
-          <h2 id="process-title">Clareza do primeiro contato à <em>entrega.</em></h2>
+          <h2 id="process-title">Do primeiro papo ao site <em>no ar.</em></h2>
+          <p>
+            Neste vídeo, explico como organizo conteúdo, design e tecnologia
+            para transformar sua ideia em um site claro, bonito e funcional.
+          </p>
+          <div className="video-notes" aria-label="Etapas do processo">
+            <span>01 · Imersão</span>
+            <span>02 · Design</span>
+            <span>03 · Publicação</span>
+          </div>
         </div>
-        <div className="process-steps">
-          <article>
-            <span>01</span>
-            <div><h3>Imersão</h3><p>Entendo seu negócio, público, objetivo e o desafio que precisamos resolver.</p></div>
-          </article>
-          <article>
-            <span>02</span>
-            <div><h3>Estratégia</h3><p>Defino a direção criativa, a mensagem e os pontos de conversão do projeto.</p></div>
-          </article>
-          <article>
-            <span>03</span>
-            <div><h3>Execução</h3><p>Transformo o plano em uma entrega profissional, funcional e pronta para crescer.</p></div>
-          </article>
+
+        <div className="video-frame">
+          <iframe
+            src="https://www.youtube-nocookie.com/embed/ScMzIvxBSi4?rel=0"
+            title="Como funciona o processo de criação de um site"
+            loading="lazy"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+            referrerPolicy="strict-origin-when-cross-origin"
+            allowFullScreen
+          ></iframe>
         </div>
       </section>
 
@@ -300,24 +216,19 @@ export default function Home() {
       <section className="contact section" id="contato">
         <div className="contact-grid" aria-hidden="true"></div>
         <span className="kicker">/ Vamos conversar</span>
-        <h2>Pronto para transformar presença em <em>resultado?</em></h2>
+        <h2>Vamos criar um site à altura do seu <em>negócio?</em></h2>
         <p>
-          Conte um pouco sobre seu projeto. Eu vou analisar sua necessidade e
-          mostrar o melhor caminho para sua marca crescer no digital.
+          Conte um pouco sobre sua empresa e o que você precisa. Eu analiso o
+          projeto e mostro o caminho mais simples para colocar seu site no ar.
         </p>
-        <a
-          className="contact-button"
-          href="https://wa.me/5534999005219?text=Olá%2C%20Patrick!%20Vi%20o%20site%20da%20RHE%20Marketing%20e%20quero%20solicitar%20um%20orçamento."
-          target="_blank"
-          rel="noreferrer"
-        >
+        <a className="contact-button" href={whatsappUrl} target="_blank" rel="noreferrer">
           Solicitar orçamento no WhatsApp <span aria-hidden="true">↗</span>
         </a>
       </section>
 
       <footer>
         <a className="brand" href="#inicio"><span>RHE</span> Marketing</a>
-        <p>Estratégia, design e tecnologia para negócios que querem crescer.</p>
+        <p>Sites claros, rápidos e feitos para transformar visitas em oportunidades.</p>
         <div className="footer-links">
           <a href="https://instagram.com/rhemarketando" target="_blank" rel="noreferrer">Instagram ↗</a>
           <a href="https://wa.me/5534999005219" target="_blank" rel="noreferrer">WhatsApp ↗</a>

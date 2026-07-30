@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
+import { headers } from "next/headers";
 import "./globals.css";
 
 const geistSans = Geist({
@@ -12,18 +13,51 @@ const geistMono = Geist_Mono({
   subsets: ["latin"],
 });
 
-export const metadata: Metadata = {
-  title: "RHE Marketing | Sites, Conteúdo e Tráfego",
-  description:
-    "Estratégia, design e tecnologia para transformar atenção em clientes. Sites, social media e gestão de tráfego com Patrick Mendes.",
-  other: {
-    "codex-preview": "development",
-  },
-  icons: {
-    icon: "/favicon.svg",
-    shortcut: "/favicon.svg",
-  },
-};
+export async function generateMetadata(): Promise<Metadata> {
+  const requestHeaders = await headers();
+  const host =
+    requestHeaders.get("x-forwarded-host") ??
+    requestHeaders.get("host") ??
+    "localhost:3000";
+  const protocol =
+    requestHeaders.get("x-forwarded-proto") ??
+    (host.startsWith("localhost") ? "http" : "https");
+  const baseUrl = new URL(`${protocol}://${host}`);
+  const title = "RHE Marketing | Criação de sites";
+  const description =
+    "Sites rápidos, responsivos e feitos sob medida para transformar visitas em oportunidades. Criação de sites com Patrick Mendes.";
+  const socialImage = new URL("/og.png", baseUrl).toString();
+
+  return {
+    metadataBase: baseUrl,
+    title,
+    description,
+    icons: {
+      icon: "/favicon.svg",
+      shortcut: "/favicon.svg",
+    },
+    openGraph: {
+      title,
+      description,
+      type: "website",
+      locale: "pt_BR",
+      images: [
+        {
+          url: socialImage,
+          width: 1734,
+          height: 907,
+          alt: "RHE Marketing — Sites que explicam, convencem e vendem.",
+        },
+      ],
+    },
+    twitter: {
+      card: "summary_large_image",
+      title,
+      description,
+      images: [socialImage],
+    },
+  };
+}
 
 export default function RootLayout({
   children,

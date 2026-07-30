@@ -1,15 +1,12 @@
 import assert from "node:assert/strict";
 import test from "node:test";
 
-const developmentPreviewMeta =
-  /<meta(?=[^>]*\bname=["']codex-preview["'])(?=[^>]*\bcontent=["']development["'])[^>]*>/i;
-
-test("renders development preview metadata", async () => {
+async function renderHome() {
   const workerUrl = new URL("../dist/server/index.js", import.meta.url);
   workerUrl.searchParams.set("test", `${process.pid}-${Date.now()}`);
   const { default: worker } = await import(workerUrl.href);
 
-  const response = await worker.fetch(
+  return worker.fetch(
     new Request("http://localhost/", {
       headers: { accept: "text/html" },
     }),
@@ -23,11 +20,30 @@ test("renders development preview metadata", async () => {
       passThroughOnException() {},
     },
   );
+}
+
+test("renders the website-creation landing page", async () => {
+  const response = await renderHome();
+  const html = await response.text();
 
   assert.equal(response.status, 200);
+  assert.match(response.headers.get("content-type") ?? "", /^text\/html\b/i);
+  assert.match(html, /Sites que explicam, convencem/);
+  assert.match(html, /Sites recentes/);
+  assert.match(html, /Quem está por trás/);
+  assert.match(html, /Soluções complementares/);
+  assert.match(html, /Vamos conversar/);
+  assert.doesNotMatch(html, /Projetos selecionados/);
+  assert.doesNotMatch(html, /O que eu faço/);
+});
+
+test("renders absolute social sharing metadata", async () => {
+  const response = await renderHome();
+  const html = await response.text();
+
   assert.match(
-    response.headers.get("content-type") ?? "",
-    /^text\/html\b/i,
+    html,
+    /property="og:image" content="http:\/\/localhost(?::3000)?\/og\.png"/,
   );
-  assert.match(await response.text(), developmentPreviewMeta);
+  assert.match(html, /name="twitter:card" content="summary_large_image"/);
 });
