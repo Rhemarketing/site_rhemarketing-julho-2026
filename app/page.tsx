@@ -50,10 +50,10 @@ const recentSites = [
 ];
 
 const extras = [
-  "Lojas virtuais",
+  "Design Destacado",
   "Automações com IA",
-  "Edição de vídeo",
-  "Copywriting e redação",
+  "Integrações com WhatsApp",
+  "Painel de Gestão"
 ];
 
 const whatsappUrl =
@@ -226,19 +226,18 @@ export default function Home() {
           <span className="kicker">/ Quem está por trás</span>
           <h2>Prazer, sou <em>Patrick Mendes.</em></h2>
           <p className="about-lead">
-            Uno estratégia, criatividade e tecnologia para construir uma
-            presença digital que faça sentido para o seu negócio — e para as
-            pessoas que você quer alcançar.
+            Trabalho com Design Gráfico a 10 anos e Criação de Sites a 5 anos.
+            Acompanho de perto as novas tecnologias de IA e automação para oferecer
+            as soluções mais modernas a você.
           </p>
+          <br></br>
           <p>
-            Você fala diretamente comigo em todas as etapas. Isso torna o
-            processo mais próximo, ágil e alinhado ao que sua marca realmente
-            precisa.
+            Você fala diretamente comigo em todas as etapas.
           </p>
           <div className="about-points">
-            <span>Atendimento direto</span>
-            <span>Estratégia sob medida</span>
-            <span>Suporte próximo</span>
+            <span>Arquitetação</span>
+            <span>Criação</span>
+            <span>Suporte</span>
           </div>
         </div>
       </section>
