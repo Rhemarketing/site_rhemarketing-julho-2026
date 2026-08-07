@@ -94,19 +94,30 @@ export default function Home() {
         <div className="hero-orbit hero-orbit-one" aria-hidden="true"></div>
         <div className="hero-orbit hero-orbit-two" aria-hidden="true"></div>
 
-        <div className="hero-copy">
-          <div className="eyebrow"><span></span> Criação de sites sob medida</div>
-          <h1>Web Designer e Gestor <em>de Agentes IA</em></h1>
-          <p>
-            Páginas bonitas e rápidas e automação inteligente de grandes projetos com agentes de IA.
-          </p>
-          <div className="hero-actions">
-            <a className="button button-primary" href={whatsappUrl} target="_blank" rel="noreferrer">
-              Quero criar meu site <span aria-hidden="true">↗</span>
-            </a>
-            <a className="button button-secondary" href="#sites">
-              Ver sites recentes <span aria-hidden="true">↓</span>
-            </a>
+        <div className="hero-content">
+          <div className="hero-copy">
+            <div className="eyebrow"><span></span> Criação de sites sob medida</div>
+            <h1>Web Designer e Gestor <em>de Agentes IA</em></h1>
+            <p>
+              Páginas bonitas e rápidas e automação inteligente de grandes projetos com agentes de IA.
+            </p>
+            <div className="hero-actions">
+              <a className="button button-primary" href={whatsappUrl} target="_blank" rel="noreferrer">
+                Quero criar meu site <span aria-hidden="true">↗</span>
+              </a>
+              <a className="button button-secondary" href="#sites">
+                Ver sites recentes <span aria-hidden="true">↓</span>
+              </a>
+            </div>
+          </div>
+
+          <div className="hero-photo">
+            <img
+              src="/assets/patrick-hero.png"
+              alt="Patrick Mendes"
+              width="700"
+              height="900"
+            />
           </div>
         </div>
 
