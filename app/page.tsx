@@ -69,7 +69,6 @@ export default function Home() {
 
         <nav className="desktop-nav" aria-label="Navegação principal">
           <a href="#sites">Sites recentes</a>
-          <a href="#processo">Processo</a>
           <a href="#sobre">Sobre</a>
           <a href="#contato">Contato</a>
         </nav>
@@ -82,7 +81,6 @@ export default function Home() {
           <summary aria-label="Abrir menu"><span></span><span></span></summary>
           <nav aria-label="Navegação móvel">
             <a href="#sites">Sites recentes</a>
-            <a href="#processo">Processo</a>
             <a href="#sobre">Sobre</a>
             <a href="#contato">Contato</a>
           </nav>
@@ -184,6 +182,7 @@ export default function Home() {
         </div>
       </section>
 
+      {/* Seção 'Como funciona' temporariamente desativada
       <section className="video-section section" id="processo" aria-labelledby="process-title">
         <div className="video-copy">
           <span className="kicker">/ Como funciona</span>
@@ -210,6 +209,7 @@ export default function Home() {
           ></iframe>
         </div>
       </section>
+      */}
 
       <section className="about section" id="sobre">
         <div className="about-visual">
