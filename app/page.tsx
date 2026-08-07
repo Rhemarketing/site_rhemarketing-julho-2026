@@ -1,27 +1,51 @@
 const recentSites = [
   {
-    title: "Insta Domination",
-    description: "Landing page para lançamento de curso online.",
-    image: "/projects/site-01.jpg",
-    href: "#contato",
+    title: "Palhaço Marotinho",
+    description: "Página divertida com painel de gestão.",
+    image: "/projects/marotinho.jpg",
+    href: "https://palhacomarotinho.com.br/",
   },
   {
-    title: "ISK Contabilidade",
-    description: "Site institucional claro, sólido e profissional.",
-    image: "/projects/site-02.jpg",
-    href: "https://iskcontabilidade.com/",
+    title: "DNA da Pizza",
+    description: "Site inteligente com painel.",
+    image: "/projects/dnapizza.jpg",
+    href: "https://dnadapizza.rhemarketing.com/",
   },
   {
-    title: "Marketeezo",
-    description: "Experiência digital leve para uma agência criativa.",
-    image: "/projects/site-03.jpg",
-    href: "#contato",
+    title: "Unigospel",
+    description: "Plataforma de cursos com IA.",
+    image: "/projects/unigospel.jpg",
+    href: "https://unigospel.com/",
   },
   {
-    title: "Digital Marketing",
-    description: "Site moderno para apresentar serviços e resultados.",
-    image: "/projects/site-04.jpg",
-    href: "#contato",
+    title: "Paulinho Soluções",
+    description: "Assistência Técnica com design de destaque.",
+    image: "/projects/paulinho.jpg",
+    href: "https://www.paulinhosolucoes.com.br/",
+  },
+  {
+    title: "Protec Balanças",
+    description: "Site institucional com blog e painel de gestão.",
+    image: "/projects/protec.jpg",
+    href: "https://protecbalancas.com.br/",
+  },
+  {
+    title: "Paulo Designer",
+    description: "Página minimalista com painel de gestão.",
+    image: "/projects/paulodesigner.jpg",
+    href: "https://paulogdesign.com/",
+  },
+  {
+    title: "Renata Delfino",
+    description: "Site institucional com painel de gestão.",
+    image: "/projects/renata.jpg",
+    href: "https://deixesualuzbrilhar.com/",
+  },
+  {
+    title: "Videira Ituiutaba",
+    description: "Plataforma de cursos com login de alunos.",
+    image: "/projects/videiracursos.jpg",
+    href: "https://cursos.videiraituiutaba.com.br/",
   },
 ];
 
@@ -39,8 +63,8 @@ export default function Home() {
   return (
     <main>
       <header className="site-header">
-        <a className="brand" href="#inicio" aria-label="RHE Marketing — início">
-          <span>RHE</span> Marketing
+        <a className="brand" href="#inicio" aria-label="Patrick Mendes — início">
+          <span>Patrick</span> Mendes
         </a>
 
         <nav className="desktop-nav" aria-label="Navegação principal">
@@ -72,10 +96,9 @@ export default function Home() {
 
         <div className="hero-copy">
           <div className="eyebrow"><span></span> Criação de sites sob medida</div>
-          <h1>Sites que explicam, convencem <em>e vendem.</em></h1>
+          <h1>Web Designer e Gestor <em>de Agentes IA</em></h1>
           <p>
-            Crio sites rápidos, responsivos e com uma mensagem clara — para sua
-            empresa parecer tão profissional quanto ela realmente é.
+            Páginas bonitas e rápidas e automação inteligente de grandes projetos com agentes de IA.
           </p>
           <div className="hero-actions">
             <a className="button button-primary" href={whatsappUrl} target="_blank" rel="noreferrer">
