@@ -4,7 +4,6 @@ dist/
 .wrangler/
 .sites-runtime/
 .git/
-.openai/
 *.tar.gz
 *.md
 .gitignore
