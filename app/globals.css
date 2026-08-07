@@ -412,6 +412,7 @@ summary {
   0% {
     transform: translateX(0);
   }
+
   100% {
     transform: translateX(-50%);
   }
@@ -774,7 +775,7 @@ summary {
 .contact h2 {
   max-width: 1050px;
   margin: 24px auto 28px;
-  font-size: clamp(56px, 7.4vw, 108px);
+  font-size: clamp(53px, 7.4vw, 108px);
   line-height: .9;
   letter-spacing: -.065em;
   text-wrap: balance;
@@ -1001,7 +1002,7 @@ footer small {
   .hero-copy {
     max-width: 100%;
     padding-bottom: 0;
-    margin: 0 0 180px 0;
+    margin: 0 0 160px 0;
   }
 
   .hero-photo {
@@ -1010,7 +1011,7 @@ footer small {
     margin-bottom: -50px;
     position: absolute;
     z-index: -1;
-    bottom: -140px;
+    bottom: -75px;
     right: 30px;
   }
 
