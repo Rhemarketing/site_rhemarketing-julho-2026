@@ -23,9 +23,9 @@ export async function generateMetadata(): Promise<Metadata> {
     requestHeaders.get("x-forwarded-proto") ??
     (host.startsWith("localhost") ? "http" : "https");
   const baseUrl = new URL(`${protocol}://${host}`);
-  const title = "RHE Marketing | Criação de sites";
+  const title = "Patrick Mendes | Web Designer e Gestor de Agentes IA";
   const description =
-    "Sites rápidos, responsivos e feitos sob medida para transformar visitas em oportunidades. Criação de sites com Patrick Mendes.";
+    "Páginas bonitas e rápidas e automação inteligente de grandes projetos com agentes de IA. Criação de sites com Patrick Mendes.";
   const socialImage = new URL("/og.png", baseUrl).toString();
 
   return {
@@ -46,7 +46,7 @@ export async function generateMetadata(): Promise<Metadata> {
           url: socialImage,
           width: 1734,
           height: 907,
-          alt: "RHE Marketing — Sites que explicam, convencem e vendem.",
+          alt: "Patrick Mendes — Web Designer e Gestor de Agentes IA",
         },
       ],
     },

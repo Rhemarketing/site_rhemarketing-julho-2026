@@ -213,7 +213,7 @@ export default function Home() {
 
       <section className="about section" id="sobre">
         <div className="about-visual">
-          <div className="about-number" aria-hidden="true">RHE</div>
+          <div className="about-number" aria-hidden="true">PM</div>
           <img
             src="/assets/foto-patrick.jpg"
             alt="Patrick Mendes"
@@ -262,10 +262,10 @@ export default function Home() {
       <section className="contact section" id="contato">
         <div className="contact-grid" aria-hidden="true"></div>
         <span className="kicker">/ Vamos conversar</span>
-        <h2>Vamos criar um site à altura do seu <em>negócio?</em></h2>
+        <h2>Vamos criar um <i>projeto</i> <em>juntos?</em></h2>
         <p>
           Conte um pouco sobre sua empresa e o que você precisa. Eu analiso o
-          projeto e mostro o caminho mais simples para colocar seu site no ar.
+          projeto e mostro o caminho mais simples para colocá-lo no ar.
         </p>
         <a className="contact-button" href={whatsappUrl} target="_blank" rel="noreferrer">
           Solicitar orçamento no WhatsApp <span aria-hidden="true">↗</span>
@@ -273,13 +273,13 @@ export default function Home() {
       </section>
 
       <footer>
-        <a className="brand" href="#inicio"><span>RHE</span> Marketing</a>
+        <a className="brand" href="#inicio" aria-label="Patrick Mendes — início"><span>Patrick</span> Mendes</a>
         <p>Sites claros, rápidos e feitos para transformar visitas em oportunidades.</p>
         <div className="footer-links">
           <a href="https://instagram.com/rhemarketando" target="_blank" rel="noreferrer">Instagram ↗</a>
           <a href="https://wa.me/5534999005219" target="_blank" rel="noreferrer">WhatsApp ↗</a>
         </div>
-        <small>© 2026 RHE Marketing. Todos os direitos reservados.</small>
+        <small>© 2026 Patrick Mendes. Todos os direitos reservados.</small>
       </footer>
     </main>
   );
