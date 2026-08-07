@@ -96,7 +96,6 @@ export default function Home() {
 
         <div className="hero-content">
           <div className="hero-copy">
-            <div className="eyebrow"><span></span> Criação de sites sob medida</div>
             <h1>Web Designer e Gestor <em>de Agentes IA</em></h1>
             <p>
               Páginas bonitas e rápidas e automação inteligente de grandes projetos com agentes de IA.
@@ -106,7 +105,7 @@ export default function Home() {
                 Quero criar meu site <span aria-hidden="true">↗</span>
               </a>
               <a className="button button-secondary" href="#sites">
-                Ver sites recentes <span aria-hidden="true">↓</span>
+                Projetos recentes <span aria-hidden="true">↓</span>
               </a>
             </div>
           </div>
@@ -122,31 +121,29 @@ export default function Home() {
         </div>
 
         <div className="hero-proof" aria-label="Diferenciais do serviço">
-          <span><b>01</b> Design sob medida</span>
-          <span><b>02</b> Perfeito no celular</span>
-          <span><b>03</b> Pronto para vender</span>
+          <span><b>01</b> Páginas</span>
+          <span><b>02</b> Automações</span>
+          <span><b>03</b> Sistemas</span>
         </div>
       </section>
 
       <section className="recent-sites section" id="sites" aria-labelledby="sites-title">
         <div className="section-heading sites-heading">
           <div>
-            <span className="kicker">/ Sites recentes</span>
-            <h2 id="sites-title">Trabalhos que já estão <em>no mundo.</em></h2>
+            <span className="kicker">/ Projetos recentes</span>
+            <h2 id="sites-title">Páginas e Sistemas <em>online.</em></h2>
           </div>
           <p>
-            Uma seleção dos projetos mais recentes. Arraste para explorar e
-            clique em um card para conhecer o site.
+            Click em um dos projetos para conhecer.
           </p>
         </div>
 
-        <div className="carousel-shell">
-          <div className="site-carousel" aria-label="Carrossel de sites recentes">
+        <div className="carousel-marquee">
+          <div className="carousel-track">
             {recentSites.map((site, index) => (
               <a
                 className="site-card"
                 href={site.href}
-                id={`site-${index + 1}`}
                 key={site.title}
                 aria-label={`Conhecer o projeto ${site.title}`}
                 target={site.href.startsWith("http") ? "_blank" : undefined}
@@ -162,12 +159,27 @@ export default function Home() {
                 </div>
               </a>
             ))}
-          </div>
-
-          <div className="carousel-controls" aria-label="Controles do carrossel">
-            <a href="#site-1" aria-label="Ir para o primeiro site">←</a>
-            <div aria-hidden="true"><span></span></div>
-            <a href="#site-4" aria-label="Ir para o último site">→</a>
+            {/* Duplicated set for seamless infinite loop */}
+            {recentSites.map((site) => (
+              <a
+                className="site-card"
+                href={site.href}
+                key={`dup-${site.title}`}
+                aria-hidden="true"
+                tabIndex={-1}
+                target={site.href.startsWith("http") ? "_blank" : undefined}
+                rel={site.href.startsWith("http") ? "noreferrer" : undefined}
+              >
+                <div className="site-card-image">
+                  <img src={site.image} alt="" loading="lazy" />
+                  <span aria-hidden="true">↗</span>
+                </div>
+                <div className="site-card-copy">
+                  <h3>{site.title}</h3>
+                  <p>{site.description}</p>
+                </div>
+              </a>
+            ))}
           </div>
         </div>
       </section>
@@ -203,7 +215,7 @@ export default function Home() {
         <div className="about-visual">
           <div className="about-number" aria-hidden="true">RHE</div>
           <img
-            src="/assets/patrick-hero.png"
+            src="/assets/foto-patrick.jpg"
             alt="Patrick Mendes"
             width="700"
             height="900"
