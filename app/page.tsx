@@ -9,7 +9,7 @@ const recentSites = [
     title: "DNA da Pizza",
     description: "Site inteligente com painel.",
     image: "/projects/dnapizza.jpg",
-    href: "https://dnadapizza.rhemarketing.com/",
+    href: "https://www.dnadapizza.com.br/",
   },
   {
     title: "Unigospel",
