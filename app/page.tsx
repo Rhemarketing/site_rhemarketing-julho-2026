@@ -1,3 +1,5 @@
+import Link from "next/link";
+
 const recentSites = [
   {
     title: "Palhaço Marotinho",
@@ -69,6 +71,7 @@ export default function Home() {
 
         <nav className="desktop-nav" aria-label="Navegação principal">
           <a href="#sites">Sites recentes</a>
+          <a href="#outros-servicos">Outros serviços</a>
           <a href="#sobre">Sobre</a>
           <a href="#contato">Contato</a>
         </nav>
@@ -81,6 +84,7 @@ export default function Home() {
           <summary aria-label="Abrir menu"><span></span><span></span></summary>
           <nav aria-label="Navegação móvel">
             <a href="#sites">Sites recentes</a>
+            <a href="#outros-servicos">Outros serviços</a>
             <a href="#sobre">Sobre</a>
             <a href="#contato">Contato</a>
           </nav>
@@ -178,6 +182,71 @@ export default function Home() {
                 </div>
               </a>
             ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="other-services section" id="outros-servicos" aria-labelledby="other-services-title">
+        <div className="section-heading">
+          <div>
+            <span className="kicker">/ Outros serviços</span>
+            <h2 id="other-services-title">Soluções criativas além da <em>web.</em></h2>
+          </div>
+          <p>
+            Da identidade visual marcante à edição dinâmica e tráfego estratégico.
+          </p>
+        </div>
+
+        <div className="services-grid">
+          {/* Card 1: Design Gráfico - Clicável */}
+          <Link href="/design-grafico" className="service-card service-card-interactive" aria-label="Conhecer galeria de Design Gráfico">
+            <div className="service-card-top">
+              <span className="service-number">01</span>
+              <span className="service-badge">Ver Galeria ↗</span>
+            </div>
+            <div className="service-card-content">
+              <h3>Design Gráfico</h3>
+              <p>
+                Identidades visuais marcantes, posts para redes sociais, criativos publicitários e materiais promocionais de alto impacto estético.
+              </p>
+            </div>
+            <div className="service-card-footer">
+              <span className="service-cta-link">Explorar artes e projetos <span aria-hidden="true">→</span></span>
+            </div>
+          </Link>
+
+          {/* Card 2: Edição de Vídeo - Clicável */}
+          <Link href="/edicao-de-video" className="service-card service-card-interactive" aria-label="Conhecer portfólio de Edição de Vídeo">
+            <div className="service-card-top">
+              <span className="service-number">02</span>
+              <span className="service-badge">Ver Galeria ↗</span>
+            </div>
+            <div className="service-card-content">
+              <h3>Edição de Vídeo</h3>
+              <p>
+                Cortes dinâmicos, efeitos visuais, motion graphics, sound design e legendas animadas projetados para retenção e engajamento.
+              </p>
+            </div>
+            <div className="service-card-footer">
+              <span className="service-cta-link">Explorar portfólio de vídeos <span aria-hidden="true">→</span></span>
+            </div>
+          </Link>
+
+          {/* Card 3: Tráfego Pago - Não Clicável */}
+          <div className="service-card service-card-static" aria-label="Tráfego Pago — Gestão Estratégica">
+            <div className="service-card-top">
+              <span className="service-number">03</span>
+              <span className="service-badge-static">Gestão Estratégica</span>
+            </div>
+            <div className="service-card-content">
+              <h3>Tráfego Pago</h3>
+              <p>
+                Planejamento e gerenciamento de campanhas assertivas no Meta Ads e Google Ads para atrair clientes qualificados e acelerar suas conversões.
+              </p>
+            </div>
+            <div className="service-card-footer">
+              <span className="service-static-note">Anúncios & Conversão Contínua</span>
+            </div>
           </div>
         </div>
       </section>
