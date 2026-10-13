@@ -1,23 +1,34 @@
-import mysql, { Pool } from "mysql2/promise";
+import mysql from "mysql2/promise";
 
 const DATABASE_URL =
   process.env.DATABASE_URL ||
   "mariadb://espacovip:R3nhc1b816nsv44ANrODZif8meIluP1M@179.236.73.45:3306/espacovip";
 
-let pool: Pool | null = null;
-
-export function getDbPool(): Pool {
-  if (!pool) {
-    pool = mysql.createPool({
-      uri: DATABASE_URL,
-      waitForConnections: true,
-      connectionLimit: 10,
-      queueLimit: 0,
-      enableKeepAlive: true,
-      keepAliveInitialDelay: 10000,
-    });
-  }
-  return pool;
+export function getDbPool() {
+  return {
+    async query(sql: string, params?: any[]) {
+      const conn = await mysql.createConnection({
+        uri: DATABASE_URL,
+        disableEval: true,
+      });
+      try {
+        return await conn.query(sql, params);
+      } finally {
+        await conn.end().catch(() => {});
+      }
+    },
+    async execute(sql: string, params?: any[]) {
+      const conn = await mysql.createConnection({
+        uri: DATABASE_URL,
+        disableEval: true,
+      });
+      try {
+        return await conn.execute(sql, params);
+      } finally {
+        await conn.end().catch(() => {});
+      }
+    },
+  };
 }
 
 export interface GalleryItem {

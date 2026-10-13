@@ -1,7 +1,12 @@
 import { NextResponse } from "next/server";
 import bcrypt from "bcryptjs";
 import { getDbPool } from "@/lib/db";
-import { createSessionToken, setAdminSessionCookie } from "@/lib/auth";
+import {
+  createSessionToken,
+  setAdminSessionCookie,
+  SESSION_COOKIE_NAME,
+  SESSION_MAX_AGE,
+} from "@/lib/auth";
 
 export async function POST(request: Request) {
   try {
@@ -40,12 +45,24 @@ export async function POST(request: Request) {
     }
 
     const token = createSessionToken(user.username);
-    await setAdminSessionCookie(token);
+    try {
+      await setAdminSessionCookie(token);
+    } catch {}
 
-    return NextResponse.json({
+    const response = NextResponse.json({
       success: true,
       user: { username: user.username },
     });
+
+    response.cookies.set(SESSION_COOKIE_NAME, token, {
+      httpOnly: true,
+      secure: process.env.NODE_ENV === "production",
+      sameSite: "lax",
+      path: "/",
+      maxAge: SESSION_MAX_AGE,
+    });
+
+    return response;
   } catch (error) {
     console.error("Erro na rota de login admin:", error);
     return NextResponse.json(

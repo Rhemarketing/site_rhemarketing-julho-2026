@@ -1,11 +1,11 @@
 import { cookies, headers } from "next/headers";
 import crypto from "crypto";
 
-const SESSION_COOKIE_NAME = "pm_admin_session";
+export const SESSION_COOKIE_NAME = "pm_admin_session";
 const SESSION_SECRET =
   process.env.ADMIN_SESSION_SECRET ||
   "pm_sec_9874fg23908fwe089f23kjnf09823f-rhe-2026";
-const SESSION_MAX_AGE = 60 * 60 * 24 * 7; // 7 dias em segundos
+export const SESSION_MAX_AGE = 60 * 60 * 24 * 7; // 7 dias em segundos
 
 interface SessionData {
   username: string;

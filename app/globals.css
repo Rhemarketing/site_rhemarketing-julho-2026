@@ -1883,6 +1883,46 @@ footer small {
   background: rgba(18, 103, 255, 0.05);
 }
 
+.admin-password-field-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+  width: 100%;
+}
+
+.admin-password-field-wrapper input {
+  padding-right: 44px;
+}
+
+.admin-password-toggle {
+  position: absolute;
+  right: 6px;
+  top: 50%;
+  transform: translateY(-50%);
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  color: #94a3b8;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  border-radius: 6px;
+  padding: 0;
+  transition: color 0.2s ease, background 0.2s ease;
+}
+
+.admin-password-toggle:hover {
+  color: #fff;
+  background: rgba(255, 255, 255, 0.08);
+}
+
+.admin-password-toggle:focus-visible {
+  outline: 2px solid var(--blue-bright);
+  color: #fff;
+}
+
 .admin-btn-primary {
   padding: 13px 24px;
   background: var(--blue);
