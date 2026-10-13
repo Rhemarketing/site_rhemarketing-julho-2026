@@ -41,8 +41,7 @@ export default function AdminLoginPage() {
         throw new Error(data.error || "Erro ao efetuar login");
       }
 
-      router.push("/admin");
-      router.refresh();
+      window.location.href = "/admin";
     } catch (err: unknown) {
       if (err instanceof Error) {
         setError(err.message);

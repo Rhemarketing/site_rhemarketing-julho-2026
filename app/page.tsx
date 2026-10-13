@@ -51,12 +51,6 @@ const recentSites = [
   },
 ];
 
-const extras = [
-  "Design Destacado",
-  "Automações com IA",
-  "Integrações com WhatsApp",
-  "Painel de Gestão"
-];
 
 const whatsappUrl =
   "https://wa.me/5534999005219?text=Olá%2C%20Patrick!%20Vi%20seu%20site%20e%20quero%20conversar%20sobre%20a%20criação%20do%20meu%20site.";
@@ -311,21 +305,6 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="extras section" aria-labelledby="extras-title">
-        <div>
-          <span className="kicker">/ Soluções complementares</span>
-          <h2 id="extras-title">Seu digital conectado de <em>ponta a ponta.</em></h2>
-        </div>
-        <div className="extra-list">
-          {extras.map((extra, index) => (
-            <div key={extra}>
-              <span>0{index + 1}</span>
-              <h3>{extra}</h3>
-              <b aria-hidden="true">↗</b>
-            </div>
-          ))}
-        </div>
-      </section>
 
       <section className="contact section" id="contato">
         <div className="contact-grid" aria-hidden="true"></div>
