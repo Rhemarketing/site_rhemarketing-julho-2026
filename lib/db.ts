@@ -43,3 +43,18 @@ export interface GalleryItem {
   created_at: string;
   updated_at?: string;
 }
+
+export interface DiarioEntry {
+  id: number;
+  entry_date: string; // YYYY-MM-DD
+  start_time: string; // HH:MM
+  end_time: string;   // HH:MM
+  duration: string;   // HH:MM:SS
+  category: string;
+  project_client: string;
+  context_location: string;
+  description: string;
+  billable: "Sim" | "Não";
+  created_at?: string;
+  updated_at?: string;
+}

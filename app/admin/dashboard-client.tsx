@@ -223,7 +223,19 @@ export default function AdminDashboardClient({ username }: Props) {
           </div>
         )}
 
-        {/* Cabeçalho da Seção com Tabs */}
+        {/* Abas Principais do Painel */}
+        <div className="admin-section-header" style={{ marginBottom: "16px" }}>
+          <div className="admin-tabs">
+            <Link href="/admin" className="admin-tab active" style={{ textDecoration: "none" }}>
+              🖼️ Galerias (Portfólio)
+            </Link>
+            <Link href="/admin/diario-de-bordo" className="admin-tab" style={{ textDecoration: "none" }}>
+              📋 Diário de Bordo & Rotina
+            </Link>
+          </div>
+        </div>
+
+        {/* Cabeçalho da Seção com Sub-Tabs de Galeria */}
         <div className="admin-section-header">
           <div className="admin-tabs">
             <button
