@@ -5,8 +5,13 @@ import path from 'path';
 const require = createRequire('file:///c:/laragon/www/site_rhemarketing-julho-2026/package.json');
 const mysql = require('mysql2/promise');
 
-const API_KEY = 'ZjIxZTBjZDYtN2E3NS00NDY5LThjOGUtNjQ4NTBhZTAwNDJh';
-const WORKSPACE_ID = '67c079a730305e27e57d1c4b'; // Espaço Vip
+const API_KEY = process.env.CLOCKIFY_API_KEY;
+const WORKSPACE_ID = process.env.CLOCKIFY_WORKSPACE_ID || '67c079a730305e27e57d1c4b'; // Espaço Vip
+
+if (!API_KEY) {
+  console.error("ERRO: A variável de ambiente CLOCKIFY_API_KEY não está configurada.");
+  process.exit(1);
+}
 const BASE_URL = `https://api.clockify.me/api/v1/workspaces/${WORKSPACE_ID}`;
 
 const STATE_FILE = path.resolve('C:/laragon/www/site_rhemarketing-julho-2026/scripts/clockify-sync-state.json');
@@ -63,12 +68,14 @@ function adjustEndDate(dateStr, startTime, endTime) {
 async function main() {
   const state = loadState();
 
+  const dbUrl = process.env.DATABASE_URL;
+  if (!dbUrl) {
+    console.error("ERRO: A variável de ambiente DATABASE_URL não está configurada.");
+    process.exit(1);
+  }
+
   const conn = await mysql.createConnection({
-    host: '179.236.73.45',
-    port: 3306,
-    user: 'espacovip',
-    password: 'R3nhc1b816nsv44ANrODZif8meIluP1M',
-    database: 'espacovip',
+    uri: dbUrl,
   });
 
   const [allRows] = await conn.execute(

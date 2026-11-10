@@ -5,3 +5,12 @@ dist/
 .sites-runtime/
 *.tar.gz
 *.tsbuildinfo
+
+# Environment and secrets
+.env
+.env*.local
+.env.local
+.env.production
+.env.development
+*.pem
+*.key

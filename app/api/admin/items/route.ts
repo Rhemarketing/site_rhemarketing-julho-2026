@@ -3,6 +3,18 @@ import { getAdminSession } from "@/lib/auth";
 import { getDbPool } from "@/lib/db";
 import fs from "fs/promises";
 import path from "path";
+import crypto from "crypto";
+
+const ALLOWED_IMAGE_EXTENSIONS = new Set([".jpg", ".jpeg", ".png", ".webp", ".gif"]);
+const ALLOWED_VIDEO_EXTENSIONS = new Set([".mp4", ".webm", ".mov"]);
+
+const MAX_IMAGE_SIZE = 15 * 1024 * 1024; // 15MB
+const MAX_VIDEO_SIZE = 100 * 1024 * 1024; // 100MB
+
+function getSafeFileExtension(filename: string): string {
+  const ext = path.extname(filename || "").toLowerCase();
+  return ext;
+}
 
 export async function GET(request: Request) {
   const session = await getAdminSession(request);
@@ -77,30 +89,79 @@ export async function POST(request: Request) {
     await fs.mkdir(uploadDir, { recursive: true });
 
     if (file && file.size > 0) {
-      const cleanFileName = file.name.replace(/[^a-zA-Z0-9.-]/g, "_");
-      const uniqueFileName = `${Date.now()}_${cleanFileName}`;
-      const absoluteTarget = path.join(uploadDir, uniqueFileName);
+      const ext = getSafeFileExtension(file.name);
+      const isVideo = type === "video";
+      const allowedSet = isVideo ? ALLOWED_VIDEO_EXTENSIONS : ALLOWED_IMAGE_EXTENSIONS;
+      const maxSize = isVideo ? MAX_VIDEO_SIZE : MAX_IMAGE_SIZE;
+
+      if (!allowedSet.has(ext)) {
+        return NextResponse.json(
+          {
+            error: `Extensão '${ext}' não permitida para ${
+              isVideo ? "vídeo" : "imagem"
+            }. Formatos válidos: ${Array.from(allowedSet).join(", ")}`,
+          },
+          { status: 400 }
+        );
+      }
+
+      if (file.size > maxSize) {
+        return NextResponse.json(
+          {
+            error: `Arquivo excede o limite máximo permitido de ${
+              maxSize / (1024 * 1024)
+            }MB.`,
+          },
+          { status: 400 }
+        );
+      }
+
+      // Nome do arquivo seguro com hash aleatório para evitar colisões e path traversal
+      const safeRandomName = `${Date.now()}_${crypto.randomBytes(12).toString("hex")}${ext}`;
+      const absoluteTarget = path.join(uploadDir, safeRandomName);
 
       const arrayBuffer = await file.arrayBuffer();
       const buffer = Buffer.from(arrayBuffer);
       await fs.writeFile(absoluteTarget, buffer);
 
-      filePath = `/uploads/${uploadSubdir}/${uniqueFileName}`;
+      filePath = `/uploads/${uploadSubdir}/${safeRandomName}`;
     } else if (externalUrl) {
       filePath = externalUrl;
     }
 
     let thumbnailPath: string | null = null;
     if (thumbnailFile && thumbnailFile.size > 0) {
-      const cleanThumbName = thumbnailFile.name.replace(/[^a-zA-Z0-9.-]/g, "_");
-      const uniqueThumbName = `${Date.now()}_thumb_${cleanThumbName}`;
-      const absoluteThumbTarget = path.join(uploadDir, uniqueThumbName);
+      const thumbExt = getSafeFileExtension(thumbnailFile.name);
+      if (!ALLOWED_IMAGE_EXTENSIONS.has(thumbExt)) {
+        return NextResponse.json(
+          {
+            error: `Extensão de miniatura '${thumbExt}' não permitida. Formatos válidos: ${Array.from(
+              ALLOWED_IMAGE_EXTENSIONS
+            ).join(", ")}`,
+          },
+          { status: 400 }
+        );
+      }
+
+      if (thumbnailFile.size > MAX_IMAGE_SIZE) {
+        return NextResponse.json(
+          {
+            error: `Miniatura excede o limite máximo permitido de ${
+              MAX_IMAGE_SIZE / (1024 * 1024)
+            }MB.`,
+          },
+          { status: 400 }
+        );
+      }
+
+      const safeThumbName = `${Date.now()}_thumb_${crypto.randomBytes(12).toString("hex")}${thumbExt}`;
+      const absoluteThumbTarget = path.join(uploadDir, safeThumbName);
 
       const arrayBuffer = await thumbnailFile.arrayBuffer();
       const buffer = Buffer.from(arrayBuffer);
       await fs.writeFile(absoluteThumbTarget, buffer);
 
-      thumbnailPath = `/uploads/${uploadSubdir}/${uniqueThumbName}`;
+      thumbnailPath = `/uploads/${uploadSubdir}/${safeThumbName}`;
     }
 
     const pool = getDbPool();

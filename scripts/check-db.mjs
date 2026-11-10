@@ -1,6 +1,10 @@
 import mysql from "mysql2/promise";
 
-const DATABASE_URL = "mariadb://espacovip:R3nhc1b816nsv44ANrODZif8meIluP1M@179.236.73.45:3306/espacovip";
+const DATABASE_URL = process.env.DATABASE_URL;
+if (!DATABASE_URL) {
+  console.error("ERRO: A variável de ambiente DATABASE_URL não está configurada.");
+  process.exit(1);
+}
 
 const conn = await mysql.createConnection({
   uri: DATABASE_URL,

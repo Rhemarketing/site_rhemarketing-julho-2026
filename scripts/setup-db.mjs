@@ -1,7 +1,11 @@
 import mysql from "mysql2/promise";
 import bcrypt from "bcryptjs";
 
-const DATABASE_URL = "mariadb://espacovip:R3nhc1b816nsv44ANrODZif8meIluP1M@179.236.73.45:3306/espacovip";
+const DATABASE_URL = process.env.DATABASE_URL;
+if (!DATABASE_URL) {
+  console.error("ERRO: A variável de ambiente DATABASE_URL não está configurada.");
+  process.exit(1);
+}
 
 async function main() {
   console.log("Conectando ao banco de dados...");
@@ -40,8 +44,14 @@ async function main() {
     ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
   `);
 
-  const username = "patrick@marketing";
-  const password = "f5u9b1a7gf3r7498gdf56fg75";
+  const username = process.env.ADMIN_INITIAL_USER || "patrick@marketing";
+  const password = process.env.ADMIN_INITIAL_PASS;
+
+  if (!password) {
+    console.log("Configuração das tabelas concluída. (Nenhum ADMIN_INITIAL_PASS fornecido para criar/atualizar usuário).");
+    await connection.end();
+    return;
+  }
 
   console.log(`Gerando hash para usuário ${username}...`);
   const passwordHash = await bcrypt.hash(password, 10);

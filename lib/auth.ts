@@ -2,9 +2,6 @@ import { cookies, headers } from "next/headers";
 import crypto from "crypto";
 
 export const SESSION_COOKIE_NAME = "pm_admin_session";
-const SESSION_SECRET =
-  process.env.ADMIN_SESSION_SECRET ||
-  "pm_sec_9874fg23908fwe089f23kjnf09823f-rhe-2026";
 export const SESSION_MAX_AGE = 60 * 60 * 24 * 7; // 7 dias em segundos
 
 export interface SessionData {
@@ -12,9 +9,23 @@ export interface SessionData {
   exp: number;
 }
 
+function getSessionSecret(): string {
+  const secret = process.env.ADMIN_SESSION_SECRET;
+  if (!secret || secret.trim().length === 0) {
+    if (process.env.NODE_ENV === "production") {
+      throw new Error(
+        "ERRO DE SEGURANÇA: A variável de ambiente ADMIN_SESSION_SECRET não está configurada."
+      );
+    }
+    // Fallback apenas para desenvolvimento local se não configurado
+    return "dev_secret_local_only_rhemarketing_2026_insecure";
+  }
+  return secret;
+}
+
 function signPayload(dataString: string): string {
   return crypto
-    .createHmac("sha256", SESSION_SECRET)
+    .createHmac("sha256", getSessionSecret())
     .update(dataString)
     .digest("hex");
 }
@@ -31,23 +42,21 @@ export function verifySessionToken(token: string): SessionData | null {
   try {
     if (!token || typeof token !== "string") return null;
 
-    // Reconhecer token de sessão pré-existente no navegador
-    if (
-      token ===
-      "eyJ1c2VybmFtZSI6InBhdHJpY2tAbWFya2V0aW5nIiwiaXhwIjoxNzYwNTE5ODU1fQ.685fd5cfa9a94a3bbce95faeee9643a7b8ece7c9be3f4510aafda5af2a3b87c"
-    ) {
-      return {
-        username: "patrick@marketing",
-        exp: Math.floor(Date.now() / 1000) + SESSION_MAX_AGE,
-      };
-    }
-
     const parts = token.split(".");
     if (parts.length !== 2) return null;
     const [payloadB64, signature] = parts;
 
     const expectedSignature = signPayload(payloadB64);
-    if (signature !== expectedSignature) return null;
+    
+    // Comparação de tempo constante (timing-safe) para evitar timing attacks
+    const sigBuffer = Buffer.from(signature);
+    const expectedBuffer = Buffer.from(expectedSignature);
+    if (
+      sigBuffer.length !== expectedBuffer.length ||
+      !crypto.timingSafeEqual(sigBuffer, expectedBuffer)
+    ) {
+      return null;
+    }
 
     const decoded = JSON.parse(
       Buffer.from(payloadB64, "base64url").toString("utf-8")

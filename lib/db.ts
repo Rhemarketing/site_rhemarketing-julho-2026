@@ -1,34 +1,33 @@
 import mysql from "mysql2/promise";
 
-const DATABASE_URL =
-  process.env.DATABASE_URL ||
-  "mariadb://espacovip:R3nhc1b816nsv44ANrODZif8meIluP1M@179.236.73.45:3306/espacovip";
+type Pool = mysql.Pool;
 
-export function getDbPool() {
-  return {
-    async query(sql: string, params?: any[]) {
-      const conn = await mysql.createConnection({
-        uri: DATABASE_URL,
-        disableEval: true,
-      });
-      try {
-        return await conn.query(sql, params);
-      } finally {
-        await conn.end().catch(() => {});
-      }
-    },
-    async execute(sql: string, params?: any[]) {
-      const conn = await mysql.createConnection({
-        uri: DATABASE_URL,
-        disableEval: true,
-      });
-      try {
-        return await conn.execute(sql, params);
-      } finally {
-        await conn.end().catch(() => {});
-      }
-    },
-  };
+let poolInstance: Pool | null = null;
+
+function getDatabaseUrl(): string {
+  const url = process.env.DATABASE_URL;
+  if (!url) {
+    throw new Error(
+      "ERRO DE SEGURANÇA/CONFIGURAÇÃO: A variável de ambiente DATABASE_URL não está configurada."
+    );
+  }
+  return url;
+}
+
+export function getDbPool(): Pool {
+  if (!poolInstance) {
+    poolInstance = mysql.createPool({
+      uri: getDatabaseUrl(),
+      waitForConnections: true,
+      connectionLimit: 10,
+      maxIdle: 10,
+      idleTimeout: 60000,
+      queueLimit: 0,
+      enableKeepAlive: true,
+      keepAliveInitialDelay: 10000,
+    });
+  }
+  return poolInstance;
 }
 
 export interface GalleryItem {
